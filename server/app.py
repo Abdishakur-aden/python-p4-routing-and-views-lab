@@ -14,22 +14,27 @@ def print_string(parameter):
     print(parameter)
     return parameter
 
-@app.route("/count/<parameter>")
+@app.route('/count/<int:parameter>')
 def count(parameter):
-    return '\n'.join([str(i) for i in range(int(parameter))])
+    count_list = '\n'.join(str(i) for i in range(parameter)) + '\n'
+    return count_list
 
-@app.route('/math/<num1>/<operation>/<num2>')
-def math(num1, operation, num2):
+
+@app.route('/math/<int:num1>/<string:operation>/<int:num2>')
+def math_operation(num1, operation, num2):
     if operation == '+':
-        return (num1 + num2)
+        result = num1 + num2
     elif operation == '-':
-        return {num1 - num2}
+        result = num1 - num2
     elif operation == '*':
-        return f'<p>{num1 * num2}</p>'
+        result = num1 * num2
     elif operation == 'div':
-        return f'<p>{num1 / num2}</p>'
+        result = num1 / num2
     elif operation == '%':
-        return f'<p>{num1 % num2}</p>'
+        result = num1 % num2
+    else:
+        result = 'Invalid operation'
+    return str(result)
     
 
 
